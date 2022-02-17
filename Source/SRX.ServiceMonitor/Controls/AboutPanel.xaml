@@ -19,7 +19,7 @@
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
         <Label Name="lblAppName" Content="AppName" Grid.Column="1" FontWeight="Bold" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Grid.Row="1"/>
-        <Label Name="lblAppDescription" Content="Simple tool for monitoring windows services/processes." Grid.Column="1" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Grid.Row="2"/>
+        <Label Name="lblAppDescription" Content="Simple tool for monitoring windows services/processes." Grid.Column="1" VerticalContentAlignment="Top" HorizontalContentAlignment="Center" Grid.Row="2"/>
         <Label Name="lblAppVersion" Content="AppVersion" Grid.Column="1" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Grid.Row="3"/>
         <Label Name="lblAppURL" Content="AppURL" Grid.Column="1" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontWeight="Bold" Grid.Row="4"/>
     </Grid>

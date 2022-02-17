@@ -16,7 +16,7 @@ namespace SRX.ServiceMonitor.Controls
             InitializeComponent();
         }
 
-        private void btnSave_Click(object sender, RoutedEventArgs e)
+        private void BtnSave_Click(object sender, RoutedEventArgs e)
         {
             File.WriteAllText(Settings.Default.ProcessNamesFilepath, txtConfig.Text);
         }
@@ -33,10 +33,12 @@ namespace SRX.ServiceMonitor.Controls
         {
             Assembly assembly = Assembly.GetExecutingAssembly();
             string path = Path.GetDirectoryName(assembly.Location);
-            FileSystemWatcher fileSystemWatcher = new FileSystemWatcher();
-            fileSystemWatcher.Path = path;
-            fileSystemWatcher.NotifyFilter = NotifyFilters.LastWrite;
-            fileSystemWatcher.Filter = "*.txt";
+            FileSystemWatcher fileSystemWatcher = new FileSystemWatcher
+            {
+                Path = path,
+                NotifyFilter = NotifyFilters.LastWrite,
+                Filter = "*.txt"
+            };
             fileSystemWatcher.Changed += new FileSystemEventHandler(OnConfigFileTextChanged_Event);
             fileSystemWatcher.EnableRaisingEvents = true;
             OnConfigFileTextChanged_Event(null, null);

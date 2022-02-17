@@ -1,5 +1,6 @@
 ﻿//srgjanx
 
+using SRX.ServiceMonitor.Models;
 using SRX.ServiceMonitor.Properties;
 using SRX.ServiceMonitor.Utils;
 using System;
@@ -17,7 +18,7 @@ namespace SRX.ServiceMonitor.Controls
     public partial class ServicesPanel : UserControl
     {
         private Timer timer;
-        private TimeSpan ts;
+        private TimeSpan refreshTime;
         private TimeSpan GetRefreshTimeSpan = TimeSpan.FromSeconds(Settings.Default.RefreshSeconds);
 
         public ServicesPanel()
@@ -25,15 +26,13 @@ namespace SRX.ServiceMonitor.Controls
             InitializeComponent();
         }
 
-        public void Load()
+        public async Task Load()
         {
-            ts = GetRefreshTimeSpan;
+            refreshTime = GetRefreshTimeSpan;
             timer = new Timer(1000);
             timer.Elapsed += Timer_Elapsed;
             timer.Start();
-            //Remove duplicates.
-            //Format and save.
-            CheckProcesses();
+            await Refresh();
             KeyDown += WinMain_KeyDown;
         }
 
@@ -49,17 +48,17 @@ namespace SRX.ServiceMonitor.Controls
         {
             try
             {
-                if (ts.TotalSeconds <= 0)
+                if (refreshTime.TotalSeconds <= 0)
                 {
                     await Refresh();
                 }
                 else
                 {
-                    ts = ts.Add(TimeSpan.FromMilliseconds(0 - timer.Interval));
+                    refreshTime = refreshTime.Add(TimeSpan.FromMilliseconds(0 - timer.Interval));
                 }
                 Dispatcher.Invoke(() =>
                 {
-                    lblNextRefresh.Content = $"Next refresh in: {$"{(int)ts.TotalSeconds}s."}";
+                    lblNextRefresh.Content = $"Next refresh in: {$"{(int)refreshTime.TotalSeconds}s."}";
                 });
             }
             catch (Exception ex)
@@ -78,11 +77,12 @@ namespace SRX.ServiceMonitor.Controls
 
         private async Task Refresh()
         {
-            ts = GetRefreshTimeSpan;
-            await CheckProcesses();
+            refreshTime = GetRefreshTimeSpan;
+            List<ProcessInfo> processes = await CheckProcesses();
+            await UpdateProcessesUI(processes);
         }
 
-        private async Task CheckProcesses()
+        private async Task<List<ProcessInfo>> CheckProcesses()
         {
             List<ProcessInfo> processes = new List<ProcessInfo>();
             await Task.Run(() =>
@@ -108,7 +108,7 @@ namespace SRX.ServiceMonitor.Controls
                     }
                 }
             });
-            await UpdateProcessesUI(processes);
+            return processes;
         }
 
         private async Task UpdateProcessesUI(List<ProcessInfo> processes)

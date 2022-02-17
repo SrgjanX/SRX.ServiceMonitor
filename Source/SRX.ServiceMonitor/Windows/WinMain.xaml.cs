@@ -9,7 +9,12 @@ namespace SRX.ServiceMonitor.Windows
         public WinMain()
         {
             InitializeComponent();
-            servicesPanel.Load();
+            
+        }
+
+        private async void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            await servicesPanel.Load();
             configPanel.Load();
             aboutPanel.Load();
         }

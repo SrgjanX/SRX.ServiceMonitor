@@ -1,6 +1,6 @@
 ﻿//srgjanx
 
-using SRX.ServiceMonitor.Utils;
+using SRX.ServiceMonitor.Models;
 using System.Windows.Controls;
 using System.Windows.Media;
 
@@ -24,15 +24,14 @@ namespace SRX.ServiceMonitor.Controls
             switch (status)
             {
                 case ProcessStatus.Running:
-                    border.BorderBrush = Brushes.Green;
-                    border.Background = Brushes.LightGreen;
+                    lblProcessName.BorderBrush = Brushes.Green;
+                    lblProcessName.Background = Brushes.LightGreen;
                     break;
                 case ProcessStatus.Stopped:
-                    border.BorderBrush = Brushes.DarkRed;
-                    border.Background = Brushes.LightCoral;
+                    lblProcessName.BorderBrush = Brushes.DarkRed;
+                    lblProcessName.Background = Brushes.LightCoral;
                     break;
             }
-            
         }
     }
 }

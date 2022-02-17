@@ -1,6 +1,6 @@
 ﻿//srgjanx
 
-namespace SRX.ServiceMonitor.Utils
+namespace SRX.ServiceMonitor.Models
 {
     public class ProcessInfo
     {

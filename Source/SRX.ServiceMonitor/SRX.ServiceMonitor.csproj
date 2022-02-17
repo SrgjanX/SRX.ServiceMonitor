@@ -71,9 +71,9 @@
     <Compile Include="Controls\ServicesPanel.xaml.cs">
       <DependentUpon>ServicesPanel.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Utils\ProcessInfo.cs" />
+    <Compile Include="Models\ProcessInfo.cs" />
     <Compile Include="Utils\ProcessManager.cs" />
-    <Compile Include="Utils\ProcessStatus.cs" />
+    <Compile Include="Models\ProcessStatus.cs" />
     <Compile Include="Windows\WinMain.xaml.cs">
       <DependentUpon>WinMain.xaml</DependentUpon>
     </Compile>
