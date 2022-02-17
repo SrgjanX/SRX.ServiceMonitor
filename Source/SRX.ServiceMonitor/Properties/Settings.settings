@@ -1,0 +1,21 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="SRX.ServiceMonitor.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="ProcessNamesFilepath" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">ProcessNames.txt</Value>
+    </Setting>
+    <Setting Name="CommentCharacter" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">#</Value>
+    </Setting>
+    <Setting Name="RefreshSeconds" Type="System.UInt32" Scope="Application">
+      <Value Profile="(Default)">10</Value>
+    </Setting>
+    <Setting Name="About_Link" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">www.srgjanx.net</Value>
+    </Setting>
+    <Setting Name="About_AppName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">SRX Service Monitor</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

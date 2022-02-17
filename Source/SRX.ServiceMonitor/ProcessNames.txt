@@ -1,0 +1,5 @@
+﻿#All lines starting with # are comments.
+#Example for named process is "chrome;Google Chrome"
+
+devenv; Visual Studio
+chrome;Google Chrome
