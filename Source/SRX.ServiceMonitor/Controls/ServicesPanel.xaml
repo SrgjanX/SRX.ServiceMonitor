@@ -18,9 +18,24 @@
         <Label x:Name="lblBlock" Visibility="Hidden" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Content="No processess." Opacity="2" Foreground="Red" FontSize="20" FontWeight="Bold" Grid.Row="0"/>
 
         <Grid Background="#FFF0F0F0" Grid.Row="1">
-            <Label x:Name="lblNextRefresh" Content="Next refresh in:" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Grid.Row="2" Margin="0,0.334,0.333,-0.334"/>
-            <Label Content="www.srgjanx.net" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontWeight="Bold" Grid.Row="2" Margin="0,0.334,0.333,-0.334"/>
-            <Label x:Name="lblServiceCount" Content="Running: 0, Stopped: 0" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Grid.Row="2" Margin="0,0.334,0.333,-0.334" />
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="90"/>
+                <ColumnDefinition Width="0"/>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="30"/>
+                <ColumnDefinition Width="0"/>
+                <ColumnDefinition Width="90"/>
+                <ColumnDefinition Width="0"/>
+                <ColumnDefinition Width="30"/>
+            </Grid.ColumnDefinitions>
+            <Label Content="Next refresh in:" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"/>
+            <Label x:Name="lblNextRefresh" Content="0s." VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Grid.Column="2" FontWeight="Bold"/>
+            <Label Content="Running:" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Grid.Column="3"/>
+            <Label x:Name="lblRunning" Content="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Grid.Column="4" FontWeight="Bold" />
+
+            <Label Content="Stopped:" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Grid.Column="6" />
+            <Label x:Name="lblStopped" Content="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Grid.Column="8" FontWeight="Bold" />
         </Grid>
     </Grid>
 </UserControl>

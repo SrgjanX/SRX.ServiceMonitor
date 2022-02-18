@@ -6,7 +6,6 @@ using SRX.ServiceMonitor.Utils;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Timers;
@@ -58,19 +57,18 @@ namespace SRX.ServiceMonitor.Controls
                 }
                 Dispatcher.Invoke(() =>
                 {
-                    lblNextRefresh.Content = $"Next refresh in: {$"{(int)refreshTime.TotalSeconds}s."}";
+                    lblNextRefresh.Content = $"{(int)refreshTime.TotalSeconds}s.";
+                    lblBlock.Visibility = panelProcesses.Children.Count > 0 ? Visibility.Hidden : Visibility.Visible;
                 });
+
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error Occurred", MessageBoxButton.OK, MessageBoxImage.Error);
-                Application.Current.Shutdown();
-            }
-            finally
-            {
+                timer.Dispose();
+                MessageBox.Show(ex.Message, "Fatal error occurred", MessageBoxButton.OK, MessageBoxImage.Error);
                 Dispatcher.Invoke(() =>
                 {
-                    lblBlock.Visibility = panelProcesses.Children.Count > 0 ? Visibility.Hidden : Visibility.Visible;
+                    Application.Current.Shutdown();
                 });
             }
         }
@@ -87,24 +85,20 @@ namespace SRX.ServiceMonitor.Controls
             List<ProcessInfo> processes = new List<ProcessInfo>();
             await Task.Run(() =>
             {
-                if (File.Exists(Settings.Default.ProcessNamesFilepath))
+                ProcessManager processesManager = new ProcessManager();
+                string[] lines = processesManager.GetProcesses();
+                if (lines?.Any() == true)
                 {
-                    string[] lines = File.ReadAllLines(Settings.Default.ProcessNamesFilepath);
-                    lines = lines.Where(x => !x.StartsWith(Settings.Default.CommentCharacter) && !string.IsNullOrEmpty(x)).ToArray();
-                    if (lines.Any())
+                    Process[] pname;
+                    foreach (string process in lines)
                     {
-                        Process[] pname;
-                        ProcessManager processesManager = new ProcessManager();
-                        foreach (string process in lines)
+                        pname = Process.GetProcessesByName(processesManager.GetProcessName(process));
+                        bool isRunning = pname.Length != 0;
+                        processes.Add(new ProcessInfo()
                         {
-                            pname = Process.GetProcessesByName(processesManager.GetProcessName(process));
-                            bool isRunning = pname.Length != 0;
-                            processes.Add(new ProcessInfo()
-                            {
-                                Name = processesManager.GetDisplayName(process),
-                                Status = isRunning ? ProcessStatus.Running : ProcessStatus.Stopped
-                            });
-                        }
+                            Name = processesManager.GetDisplayName(process),
+                            Status = isRunning ? ProcessStatus.Running : ProcessStatus.Stopped
+                        });
                     }
                 }
             });
@@ -118,29 +112,32 @@ namespace SRX.ServiceMonitor.Controls
                 Dispatcher.Invoke(() =>
                 {
                     panelProcesses.Children.Clear();
-                    lblServiceCount.Content = "Running: 0, Stopped: 0";
+                    lblRunning.Content = processes?.Where(x => x.Status == ProcessStatus.Running)?.Count() ?? 0;
+                    lblStopped.Content = processes?.Where(x => x.Status == ProcessStatus.Stopped)?.Count() ?? 0;
                 });
                 Dispatcher.Invoke(() =>
                 {
                     foreach (ProcessInfo processInfo in processes)
                     {
-                        ProcessItem processItem = new ProcessItem()
-                        {
-                            Width = 128,
-                            Height = 64,
-                            HorizontalAlignment = HorizontalAlignment.Left,
-                            VerticalAlignment = VerticalAlignment.Top,
-                            Margin = new Thickness(5, 5, 5, 5),
-                            DispalyName = processInfo.Name
-                        };
-                        processItem.SetStatus(processInfo.Status);
-                        panelProcesses.Children.Add(processItem);
+                        panelProcesses.Children.Add(InitializeProcessItem(processInfo));
                     }
-                    int running = processes?.Where(x => x.Status == ProcessStatus.Running)?.Count() ?? 0;
-                    int stopped = processes?.Where(x => x.Status == ProcessStatus.Stopped)?.Count() ?? 0;
-                    lblServiceCount.Content = $"Running: {running}, Stopped: {stopped}";
                 });
             });
+        }
+
+        private ProcessItem InitializeProcessItem(ProcessInfo processInfo)
+        {
+            ProcessItem processItem = new ProcessItem()
+            {
+                Width = 128,
+                Height = 64,
+                HorizontalAlignment = HorizontalAlignment.Left,
+                VerticalAlignment = VerticalAlignment.Top,
+                Margin = new Thickness(5),
+                DispalyName = processInfo.Name
+            };
+            processItem.SetStatus(processInfo.Status);
+            return processItem;
         }
     }
 }

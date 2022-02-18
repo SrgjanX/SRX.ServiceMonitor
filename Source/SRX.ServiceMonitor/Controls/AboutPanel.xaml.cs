@@ -14,11 +14,29 @@ namespace SRX.ServiceMonitor.Controls
             InitializeComponent();
         }
 
+        public string AppName
+        {
+            get => lblAppName.Content as string;
+            set => lblAppName.Content = value;
+        }
+
+        public string AppVersion
+        {
+            get => lblAppVersion.Content as string;
+            set => lblAppVersion.Content = value;
+        }
+
+        public string AppURL
+        {
+            get => lblAppURL.Content as string;
+            set => lblAppURL.Content = value;
+        }
+
         public void Load()
         {
-            lblAppName.Content = Settings.Default.About_AppName;
-            lblAppVersion.Content = $"Version :: {GetVersion}";
-            lblAppURL.Content = Settings.Default.About_Link;
+            AppName = Settings.Default.About_AppName;
+            AppVersion = $"Version :: {GetVersion}";
+            AppURL = Settings.Default.About_Link;
         }
 
         private string GetVersion

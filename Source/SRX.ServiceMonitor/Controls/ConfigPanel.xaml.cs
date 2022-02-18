@@ -1,6 +1,5 @@
 ﻿//srgjanx
 
-using SRX.ServiceMonitor.Properties;
 using SRX.ServiceMonitor.Utils;
 using System.IO;
 using System.Reflection;
@@ -14,23 +13,28 @@ namespace SRX.ServiceMonitor.Controls
         public ConfigPanel()
         {
             InitializeComponent();
+            LostFocus += ConfigPanel_LostFocus;
         }
 
-        private void BtnSave_Click(object sender, RoutedEventArgs e)
+        public string ConfigContent
         {
-            File.WriteAllText(Settings.Default.ProcessNamesFilepath, txtConfig.Text);
+            get => txtConfig.Text;
+            set => txtConfig.Text = value;
         }
 
-        private void OnConfigFileTextChanged_Event(object source, FileSystemEventArgs e)
+        private void SetConfigContentFromFile()
         {
-            Dispatcher.Invoke(() =>
-            {
-                txtConfig.Text = new ProcessManager().GetText();
-            });
+            ConfigContent = new ProcessManager().GetText();
+        }
+
+        private void ConfigPanel_LostFocus(object sender, RoutedEventArgs e)
+        {
+            new ProcessManager().SetText(ConfigContent);
         }
 
         public void Load()
         {
+            //Monitor for external changes to the config file:
             Assembly assembly = Assembly.GetExecutingAssembly();
             string path = Path.GetDirectoryName(assembly.Location);
             FileSystemWatcher fileSystemWatcher = new FileSystemWatcher
@@ -41,7 +45,16 @@ namespace SRX.ServiceMonitor.Controls
             };
             fileSystemWatcher.Changed += new FileSystemEventHandler(OnConfigFileTextChanged_Event);
             fileSystemWatcher.EnableRaisingEvents = true;
-            OnConfigFileTextChanged_Event(null, null);
+            //Fill the text of the config textbox:
+            SetConfigContentFromFile();
+        }
+
+        private void OnConfigFileTextChanged_Event(object source, FileSystemEventArgs e)
+        {
+            Dispatcher.Invoke(() =>
+            {
+                SetConfigContentFromFile();
+            });
         }
     }
 }
