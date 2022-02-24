@@ -96,7 +96,8 @@ namespace SRX.ServiceMonitor.Controls
                         bool isRunning = pname.Length != 0;
                         processes.Add(new ProcessInfo()
                         {
-                            Name = processesManager.GetDisplayName(process),
+                            DisplayName = processesManager.GetDisplayName(process),
+                            ProcessName = processesManager.GetProcessName(process),
                             Status = isRunning ? ProcessStatus.Running : ProcessStatus.Stopped
                         });
                     }
@@ -134,7 +135,8 @@ namespace SRX.ServiceMonitor.Controls
                 HorizontalAlignment = HorizontalAlignment.Left,
                 VerticalAlignment = VerticalAlignment.Top,
                 Margin = new Thickness(5),
-                DispalyName = processInfo.Name
+                DisplayName = processInfo.DisplayName,
+                ProcessName = processInfo.ProcessName
             };
             processItem.SetStatus(processInfo.Status);
             return processItem;
