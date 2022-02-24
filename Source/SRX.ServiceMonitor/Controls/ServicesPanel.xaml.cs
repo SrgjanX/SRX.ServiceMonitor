@@ -57,7 +57,6 @@ namespace SRX.ServiceMonitor.Controls
                 }
                 Dispatcher.Invoke(() =>
                 {
-                    lblNextRefresh.Content = $"{(int)refreshTime.TotalSeconds}s.";
                     lblBlock.Visibility = panelProcesses.Children.Count > 0 ? Visibility.Hidden : Visibility.Visible;
                 });
 

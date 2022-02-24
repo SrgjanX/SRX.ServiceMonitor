@@ -19,23 +19,15 @@
 
         <Grid Background="#FFF0F0F0" Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="90"/>
-                <ColumnDefinition Width="0"/>
-                <ColumnDefinition Width="50"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="30"/>
-                <ColumnDefinition Width="0"/>
-                <ColumnDefinition Width="90"/>
-                <ColumnDefinition Width="0"/>
+                <ColumnDefinition Width="60"/>
                 <ColumnDefinition Width="30"/>
             </Grid.ColumnDefinitions>
-            <Label Content="Next refresh in:" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"/>
-            <Label x:Name="lblNextRefresh" Content="0s." VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Grid.Column="2" FontWeight="Bold"/>
-            <Label Content="Running:" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Grid.Column="3"/>
-            <Label x:Name="lblRunning" Content="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Grid.Column="4" FontWeight="Bold" />
-
-            <Label Content="Stopped:" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Grid.Column="6" />
-            <Label x:Name="lblStopped" Content="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Grid.Column="8" FontWeight="Bold" />
+            <Label Content="Running:" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Margin="140,0,0,0"/>
+            <Label x:Name="lblRunning" Content="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Grid.Column="1" FontWeight="Bold" />
+            <Label Content="Stopped:" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Grid.Column="2" />
+            <Label x:Name="lblStopped" Content="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Grid.Column="3" FontWeight="Bold" />
         </Grid>
     </Grid>
 </UserControl>
