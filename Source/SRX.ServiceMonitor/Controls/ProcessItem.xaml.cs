@@ -1,8 +1,7 @@
 ﻿//srgjanx
 
 using SRX.ServiceMonitor.Models;
-using System;
-using System.Diagnostics;
+using SRX.ServiceMonitor.Utils;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -16,6 +15,15 @@ namespace SRX.ServiceMonitor.Controls
             InitializeComponent();
         }
 
+        public ProcessItem(ProcessInfo processInfo)
+        {
+            InitializeComponent();
+            ProcessName = processInfo.ProcessName;
+            DisplayName = processInfo.DisplayName;
+            FilePath = processInfo.FilePath;
+            SetStatus(processInfo.Status);
+        }
+
         public string ProcessName { get; set; }
 
         public string DisplayName
@@ -23,6 +31,8 @@ namespace SRX.ServiceMonitor.Controls
             get => btnProcess.Content as string;
             set => btnProcess.Content = value;
         }
+
+        public string FilePath { get; set; }
 
         public void SetStatus(ProcessStatus status)
         {
@@ -41,18 +51,8 @@ namespace SRX.ServiceMonitor.Controls
 
         private void btnProcessName_Click(object sender, RoutedEventArgs e)
         {
-            string filePath = ProcessName.EndsWith(".exe") ? ProcessName : $"{ProcessName}.exe";
-            try
-            {
-                Process p1 = new Process();
-                p1.StartInfo.FileName = filePath;
-                p1.StartInfo.CreateNoWindow = true;
-                p1.Start();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"{ex.Message}\r\nFile path: {filePath}", "Could not open process", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+            string filePath = FilePath ?? (ProcessName.EndsWith(".exe") ? ProcessName : $"{ProcessName}.exe");
+            new ProcessManager().OpenProcess(filePath);
         }
     }
 }

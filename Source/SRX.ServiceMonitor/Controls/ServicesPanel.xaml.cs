@@ -17,8 +17,6 @@ namespace SRX.ServiceMonitor.Controls
     public partial class ServicesPanel : UserControl
     {
         private Timer timer;
-        private TimeSpan refreshTime;
-        private TimeSpan GetRefreshTimeSpan = TimeSpan.FromSeconds(Settings.Default.RefreshSeconds);
 
         public ServicesPanel()
         {
@@ -27,39 +25,21 @@ namespace SRX.ServiceMonitor.Controls
 
         public async Task Load()
         {
-            refreshTime = GetRefreshTimeSpan;
-            timer = new Timer(1000);
+            timer = new Timer(Settings.Default.RefreshSeconds * 1000);
             timer.Elapsed += Timer_Elapsed;
             timer.Start();
             await Refresh();
-            KeyDown += WinMain_KeyDown;
-        }
-
-        private async void WinMain_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
-        {
-            if (e.Key == System.Windows.Input.Key.F5)
-            {
-                await Refresh();
-            }
         }
 
         private async void Timer_Elapsed(object sender, ElapsedEventArgs e)
         {
             try
             {
-                if (refreshTime.TotalSeconds <= 0)
-                {
-                    await Refresh();
-                }
-                else
-                {
-                    refreshTime = refreshTime.Add(TimeSpan.FromMilliseconds(0 - timer.Interval));
-                }
+                await Refresh();
                 Dispatcher.Invoke(() =>
                 {
                     lblBlock.Visibility = panelProcesses.Children.Count > 0 ? Visibility.Hidden : Visibility.Visible;
                 });
-
             }
             catch (Exception ex)
             {
@@ -74,7 +54,6 @@ namespace SRX.ServiceMonitor.Controls
 
         private async Task Refresh()
         {
-            refreshTime = GetRefreshTimeSpan;
             List<ProcessInfo> processes = await CheckProcesses();
             await UpdateProcessesUI(processes);
         }
@@ -91,14 +70,15 @@ namespace SRX.ServiceMonitor.Controls
                     Process[] pname;
                     foreach (string process in lines)
                     {
-                        pname = Process.GetProcessesByName(processesManager.GetProcessName(process));
-                        bool isRunning = pname.Length != 0;
-                        processes.Add(new ProcessInfo()
+                        ProcessInfo processInfo = new ProcessInfo()
                         {
-                            DisplayName = processesManager.GetDisplayName(process),
-                            ProcessName = processesManager.GetProcessName(process),
-                            Status = isRunning ? ProcessStatus.Running : ProcessStatus.Stopped
-                        });
+                            ProcessName = processesManager.GetProcessName(process)
+                        };
+                        pname = Process.GetProcessesByName(processInfo.ProcessName);
+                        processInfo.DisplayName = processesManager.GetDisplayName(process);
+                        processInfo.FilePath = GetProcessFilePath(processInfo.ProcessName);
+                        processInfo.Status = pname.Length != 0 ? ProcessStatus.Running : ProcessStatus.Stopped;
+                        processes.Add(processInfo);
                     }
                 }
             });
@@ -127,18 +107,20 @@ namespace SRX.ServiceMonitor.Controls
 
         private ProcessItem InitializeProcessItem(ProcessInfo processInfo)
         {
-            ProcessItem processItem = new ProcessItem()
+            return new ProcessItem(processInfo)
             {
                 Width = 128,
                 Height = 64,
                 HorizontalAlignment = HorizontalAlignment.Left,
                 VerticalAlignment = VerticalAlignment.Top,
-                Margin = new Thickness(5),
-                DisplayName = processInfo.DisplayName,
-                ProcessName = processInfo.ProcessName
+                Margin = new Thickness(5)
             };
-            processItem.SetStatus(processInfo.Status);
-            return processItem;
+        }
+
+        private string GetProcessFilePath(string processName)
+        {
+            Process[] process = Process.GetProcessesByName(processName);
+            return process?.Length > 0 ? process.First().GetMainModuleFileName() : null;
         }
     }
 }
