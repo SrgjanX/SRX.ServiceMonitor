@@ -20,5 +20,15 @@ namespace SRX.ServiceMonitor.Utils
                 ? fileNameBuilder.ToString()
                 : null;
         }
+
+        public static string TryGetMainModuleFileName(this Process process, int buffer = 1024)
+        {
+            try
+            {
+                return process.GetMainModuleFileName(buffer);
+            }
+            catch { }
+            return null;
+        }
     }
 }

@@ -10,6 +10,8 @@ namespace SRX.ServiceMonitor.Controls
 {
     public partial class ProcessItem : UserControl
     {
+        private string filePath;
+
         public ProcessItem()
         {
             InitializeComponent();
@@ -32,7 +34,15 @@ namespace SRX.ServiceMonitor.Controls
             set => btnProcess.Content = value;
         }
 
-        public string FilePath { get; set; }
+        public string FilePath
+        {
+            get => filePath;
+            set
+            {
+                filePath = value;
+                ToolTip = value;
+            }
+        }
 
         public void SetStatus(ProcessStatus status)
         {

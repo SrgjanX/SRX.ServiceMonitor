@@ -6,7 +6,7 @@
         xmlns:Controls="clr-namespace:SRX.ServiceMonitor.Controls"
         x:Class="SRX.ServiceMonitor.Windows.WinMain"
         mc:Ignorable="d"
-        Title="SRX Service Monitor" Height="484" Width="728" MinHeight="262" MinWidth="452" WindowStartupLocation="CenterScreen" Icon="/SRX.ServiceMonitor;component/icon.ico" Loaded="Window_Loaded">
+        Title="Service Monitor" Height="484" Width="728" MinHeight="262" MinWidth="452" WindowStartupLocation="CenterScreen" Icon="/SRX.ServiceMonitor;component/icon.ico" Loaded="Window_Loaded">
     <Grid>
         <TabControl>
             <TabItem Header="Services">

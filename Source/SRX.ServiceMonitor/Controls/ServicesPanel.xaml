@@ -15,7 +15,8 @@
             <WrapPanel x:Name="panelProcesses" Orientation="Horizontal"/>
         </ScrollViewer>
 
-        <Label x:Name="lblBlock" Visibility="Hidden" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Content="No processess." Opacity="2" Foreground="Red" FontSize="20" FontWeight="Bold" Grid.Row="0"/>
+        <Label x:Name="lblLoading" Visibility="Visible" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Content=". . ." Opacity="2" Foreground="Black" FontSize="20" FontWeight="Bold" Grid.Row="0"/>
+        <Label x:Name="lblBlock" Visibility="Hidden" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Content="No processess." Opacity="2" Foreground="DarkRed" FontSize="20" FontWeight="Bold" Grid.Row="0"/>
 
         <Grid Background="#FFF0F0F0" Grid.Row="1">
             <Grid.ColumnDefinitions>

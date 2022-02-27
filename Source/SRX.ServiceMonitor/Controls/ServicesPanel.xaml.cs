@@ -23,18 +23,21 @@ namespace SRX.ServiceMonitor.Controls
             InitializeComponent();
         }
 
-        public async Task Load()
+        public void Load()
         {
             timer = new Timer(Settings.Default.RefreshSeconds * 1000);
             timer.Elapsed += Timer_Elapsed;
             timer.Start();
-            await Refresh();
         }
 
         private async void Timer_Elapsed(object sender, ElapsedEventArgs e)
         {
             try
             {
+                Dispatcher.Invoke(() =>
+                {
+                    lblLoading.Visibility = Visibility.Hidden;
+                });
                 await Refresh();
                 Dispatcher.Invoke(() =>
                 {
@@ -44,7 +47,7 @@ namespace SRX.ServiceMonitor.Controls
             catch (Exception ex)
             {
                 timer.Dispose();
-                MessageBox.Show(ex.Message, "Fatal error occurred", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(ex.Message + "\r\n" + ex?.InnerException?.Message, "Fatal error occurred", MessageBoxButton.OK, MessageBoxImage.Error);
                 Dispatcher.Invoke(() =>
                 {
                     Application.Current.Shutdown();
@@ -94,9 +97,6 @@ namespace SRX.ServiceMonitor.Controls
                     panelProcesses.Children.Clear();
                     lblRunning.Content = processes?.Where(x => x.Status == ProcessStatus.Running)?.Count() ?? 0;
                     lblStopped.Content = processes?.Where(x => x.Status == ProcessStatus.Stopped)?.Count() ?? 0;
-                });
-                Dispatcher.Invoke(() =>
-                {
                     foreach (ProcessInfo processInfo in processes)
                     {
                         panelProcesses.Children.Add(InitializeProcessItem(processInfo));
@@ -120,7 +120,9 @@ namespace SRX.ServiceMonitor.Controls
         private string GetProcessFilePath(string processName)
         {
             Process[] process = Process.GetProcessesByName(processName);
-            return process?.Length > 0 ? process.First().GetMainModuleFileName() : null;
+            return process?.Length > 0 
+                ? process.First().TryGetMainModuleFileName() 
+                : null;
         }
     }
 }
