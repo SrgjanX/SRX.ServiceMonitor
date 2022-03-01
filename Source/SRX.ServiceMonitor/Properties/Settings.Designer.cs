@@ -35,9 +35,9 @@ namespace SRX.ServiceMonitor.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("#")]
-        public string CommentCharacter {
+        public char CommentCharacter {
             get {
-                return ((string)(this["CommentCharacter"]));
+                return ((char)(this["CommentCharacter"]));
             }
         }
         
@@ -65,6 +65,15 @@ namespace SRX.ServiceMonitor.Properties {
         public string About_AppName {
             get {
                 return ((string)(this["About_AppName"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute(";")]
+        public char SeperatorCharacter {
+            get {
+                return ((char)(this["SeperatorCharacter"]));
             }
         }
     }

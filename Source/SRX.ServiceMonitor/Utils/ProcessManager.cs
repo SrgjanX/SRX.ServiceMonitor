@@ -19,25 +19,21 @@ namespace SRX.ServiceMonitor.Utils
             if (File.Exists(Filepath))
             {
                 lines = File.ReadAllLines(Filepath);
-                lines = lines.Where(x => !x.StartsWith(Settings.Default.CommentCharacter) && !string.IsNullOrEmpty(x)).ToArray();
+                lines = lines.Where(x => !x.StartsWith(Settings.Default.CommentCharacter.ToString()) && !string.IsNullOrEmpty(x)).ToArray();
             }
             return lines;
         }
 
         public string GetProcessName(string processName)
         {
-            if(processName != null)
-            {
-                processName = processName.Split(';')[0];
-            }
-            return processName;
+            return processName?.Split(Settings.Default.SeperatorCharacter)[0];
         }
 
         public string GetDisplayName(string processName)
         {
             if (processName != null)
             {
-                string[] split = processName.Split(';');
+                string[] split = processName.Split(Settings.Default.SeperatorCharacter);
                 if(split.Length > 1)
                     processName = split[1].Trim(' ');
             }
@@ -58,10 +54,10 @@ namespace SRX.ServiceMonitor.Utils
         {
             try
             {
-                Process p1 = new Process();
-                p1.StartInfo.FileName = filePath;
-                p1.StartInfo.CreateNoWindow = true;
-                p1.Start();
+                Process process = new Process();
+                process.StartInfo.FileName = filePath;
+                process.StartInfo.CreateNoWindow = true;
+                process.Start();
             }
             catch (Exception ex)
             {
