@@ -1,0 +1,29 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:Controls="clr-namespace:SRX.ServiceMonitor.Controls"
+        x:Class="SRX.ServiceMonitor.Windows.WinMain"
+        mc:Ignorable="d"
+        Title="Service Monitor" Height="484" Width="728" MinHeight="262" MinWidth="452" WindowStartupLocation="CenterScreen" Icon="/SRX.ServiceMonitor;component/icon.ico" Loaded="Window_Loaded">
+    <Grid>
+        <TabControl>
+            <TabItem Header="Services">
+                <Grid Background="#FFE5E5E5">
+                    <Controls:ServicesPanel x:Name="servicesPanel"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Config">
+                <Grid Background="#FFE5E5E5">
+                    <Controls:ConfigPanel x:Name="configPanel"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="About">
+                <Grid Background="#FFE5E5E5">
+                    <Controls:AboutPanel x:Name="aboutPanel"/>
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>

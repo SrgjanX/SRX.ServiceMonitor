@@ -120,8 +120,8 @@ namespace SRX.ServiceMonitor.Controls
         private string GetProcessFilePath(string processName)
         {
             Process[] process = Process.GetProcessesByName(processName);
-            return process?.Length > 0 
-                ? process.First().TryGetMainModuleFileName() 
+            return process?.Length > 0
+                ? process.First().TryGetMainModuleFileName()
                 : null;
         }
     }
