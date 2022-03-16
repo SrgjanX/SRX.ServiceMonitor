@@ -12,6 +12,8 @@ namespace SRX.ServiceMonitor.Utils
     public class ProcessManager
     {
         private string Filepath => Settings.Default.ProcessNamesFilepath;
+        private char CommentCharacter = '#';
+        private char SeperatorCharacter = ';';
 
         public string[] GetProcesses()
         {
@@ -19,21 +21,21 @@ namespace SRX.ServiceMonitor.Utils
             if (File.Exists(Filepath))
             {
                 lines = File.ReadAllLines(Filepath);
-                lines = lines.Where(x => !x.StartsWith(Settings.Default.CommentCharacter.ToString()) && !string.IsNullOrEmpty(x)).ToArray();
+                lines = lines.Where(x => !x.StartsWith(CommentCharacter.ToString()) && !string.IsNullOrEmpty(x)).ToArray();
             }
             return lines;
         }
 
         public string GetProcessName(string processName)
         {
-            return processName?.Split(Settings.Default.SeperatorCharacter)[0];
+            return processName?.Split(SeperatorCharacter)[0];
         }
 
         public string GetDisplayName(string processName)
         {
             if (processName != null)
             {
-                string[] split = processName.Split(Settings.Default.SeperatorCharacter);
+                string[] split = processName.Split(SeperatorCharacter);
                 if(split.Length > 1)
                     processName = split[1].Trim(' ');
             }

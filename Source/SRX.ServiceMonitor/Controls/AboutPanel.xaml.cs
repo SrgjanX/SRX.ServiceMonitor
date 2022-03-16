@@ -16,19 +16,19 @@ namespace SRX.ServiceMonitor.Controls
 
         public string AppName
         {
-            get => lblAppName.Content as string;
+            get => (string)lblAppName.Content;
             set => lblAppName.Content = value;
         }
 
         public string AppVersion
         {
-            get => lblAppVersion.Content as string;
+            get => (string)lblAppVersion.Content;
             set => lblAppVersion.Content = value;
         }
 
         public string AppURL
         {
-            get => lblAppURL.Content as string;
+            get => (string)lblAppURL.Content;
             set => lblAppURL.Content = value;
         }
 
@@ -43,8 +43,8 @@ namespace SRX.ServiceMonitor.Controls
         {
             get
             {
-                Version version = Assembly.GetExecutingAssembly().GetName().Version;
-                return $"{version.Major}.{version.Minor}.{version.Build}";
+                Version? version = Assembly.GetExecutingAssembly()?.GetName()?.Version;
+                return $"{version?.Major}.{version?.Minor}.{version?.Build}";
             }
         }
     }

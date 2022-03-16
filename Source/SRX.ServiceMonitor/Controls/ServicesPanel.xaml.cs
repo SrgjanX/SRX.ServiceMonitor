@@ -95,11 +95,14 @@ namespace SRX.ServiceMonitor.Controls
                 Dispatcher.Invoke(() =>
                 {
                     panelProcesses.Children.Clear();
-                    lblRunning.Content = processes?.Where(x => x.Status == ProcessStatus.Running)?.Count() ?? 0;
-                    lblStopped.Content = processes?.Where(x => x.Status == ProcessStatus.Stopped)?.Count() ?? 0;
-                    foreach (ProcessInfo processInfo in processes)
+                    if(processes != null)
                     {
-                        panelProcesses.Children.Add(InitializeProcessItem(processInfo));
+                        lblRunning.Content = processes?.Where(x => x.Status == ProcessStatus.Running)?.Count() ?? 0;
+                        lblStopped.Content = processes?.Where(x => x.Status == ProcessStatus.Stopped)?.Count() ?? 0;
+                        foreach (ProcessInfo processInfo in processes)
+                        {
+                            panelProcesses.Children.Add(InitializeProcessItem(processInfo));
+                        }
                     }
                 });
             });
@@ -120,8 +123,8 @@ namespace SRX.ServiceMonitor.Controls
         private string GetProcessFilePath(string processName)
         {
             Process[] process = Process.GetProcessesByName(processName);
-            return process?.Length > 0 
-                ? process.First().TryGetMainModuleFileName() 
+            return process?.Length > 0
+                ? process.First().TryGetMainModuleFileName()
                 : null;
         }
     }

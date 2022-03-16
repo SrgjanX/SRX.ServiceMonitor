@@ -30,7 +30,7 @@ namespace SRX.ServiceMonitor.Controls
 
         public string DisplayName
         {
-            get => btnProcess.Content as string;
+            get => (string)btnProcess.Content;
             set => btnProcess.Content = value;
         }
 
