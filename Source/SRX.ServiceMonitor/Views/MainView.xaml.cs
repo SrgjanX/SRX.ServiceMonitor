@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿//srgjanx
+
+using System.Windows;
 
 namespace SRX.ServiceMonitor.Views
 {

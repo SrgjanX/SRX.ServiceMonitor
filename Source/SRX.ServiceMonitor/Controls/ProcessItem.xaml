@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:SRX.ServiceMonitor.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="64" d:DesignWidth="128">
     <Button Click="btnProcessName_Click" BorderBrush="DarkRed" BorderThickness="3" Name="btnProcess" Content="processName" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontWeight="Bold" FontFamily="Consolas" Cursor="Hand" />
