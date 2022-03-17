@@ -9,7 +9,7 @@
   Title="Service Monitor"
   Style="{StaticResource UiWindow}"
   WindowStartupLocation="CenterScreen"
-  mc:Ignorable="d" d:Width="500" d:Height="300" Loaded="Window_Loaded">
+  mc:Ignorable="d" d:Width="500" d:Height="300">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -32,9 +32,9 @@
             Content="Dashboard"
             Icon="Home24"
             Tag="dashboard"
-                        x:Name="dash"
             Type="{x:Type pages:Dashboard}" />
                     <wpfui:NavigationItem
+
             Content="Config"
             Icon="Settings24"
             Tag="config"

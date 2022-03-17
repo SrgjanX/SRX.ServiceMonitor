@@ -116,8 +116,8 @@ namespace SRX.ServiceMonitor.Pages
         {
             return new ProcessItem(processInfo)
             {
-                Width = 128,
-                Height = 64,
+                Width = 200,
+                Height = 120,
                 HorizontalAlignment = HorizontalAlignment.Left,
                 VerticalAlignment = VerticalAlignment.Top,
                 Margin = new Thickness(5)
@@ -130,6 +130,11 @@ namespace SRX.ServiceMonitor.Pages
             return process?.Length > 0
                 ? process.First().TryGetMainModuleFileName()
                 : null;
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            Load();
         }
     }
 }

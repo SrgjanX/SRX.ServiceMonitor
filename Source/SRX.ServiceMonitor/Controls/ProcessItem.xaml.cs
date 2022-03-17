@@ -50,7 +50,7 @@ namespace SRX.ServiceMonitor.Controls
             {
                 case ProcessStatus.Running:
                     btnProcess.BorderBrush = Brushes.Green;
-                    btnProcess.Background = Brushes.LightGreen;
+                    btnProcess.Background = Brushes.LightGreen;//Brushes.LightGreen;
                     break;
                 case ProcessStatus.Stopped:
                     btnProcess.BorderBrush = Brushes.DarkRed;

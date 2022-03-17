@@ -59,5 +59,10 @@ namespace SRX.ServiceMonitor.Pages
                 SetConfigContentFromFile();
             });
         }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            Load();
+        }
     }
 }

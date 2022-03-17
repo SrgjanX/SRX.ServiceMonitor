@@ -50,5 +50,10 @@ namespace SRX.ServiceMonitor.Pages
                 return $"{version?.Major}.{version?.Minor}.{version?.Build}";
             }
         }
+
+        private void Page_Loaded(object sender, System.Windows.RoutedEventArgs e)
+        {
+            Load();
+        }
     }
 }
