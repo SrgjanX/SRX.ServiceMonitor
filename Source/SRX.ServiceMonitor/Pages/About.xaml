@@ -1,0 +1,27 @@
+﻿<Page x:Class="SRX.ServiceMonitor.Pages.About"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="About">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="10*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Label Name="lblAppName" Content="AppName" Grid.Column="1" FontWeight="Bold" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Grid.Row="1"/>
+        <Label Name="lblAppDescription" Content="Simple tool for monitoring windows services/processes." Grid.Column="1" VerticalContentAlignment="Top" HorizontalContentAlignment="Center" Grid.Row="2"/>
+        <Label Name="lblAppVersion" Content="AppVersion" Grid.Column="1" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Grid.Row="3"/>
+        <Label Name="lblAppURL" Content="AppURL" Grid.Column="1" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontWeight="Bold" Grid.Row="4"/>
+    </Grid>
+</Page>

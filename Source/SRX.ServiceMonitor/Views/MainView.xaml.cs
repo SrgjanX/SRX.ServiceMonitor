@@ -1,5 +1,6 @@
 ﻿//srgjanx
 
+using SRX.ServiceMonitor.Pages;
 using System.Windows;
 
 namespace SRX.ServiceMonitor.Views
@@ -13,9 +14,9 @@ namespace SRX.ServiceMonitor.Views
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            servicesPanel.Load();
-            configPanel.Load();
-            aboutPanel.Load();
+            //servicesPanel.Load();
+            //config.Load();
+            //aboutPanel.Load();
         }
     }
 }

@@ -1,4 +1,15 @@
 ﻿<Application x:Class="SRX.ServiceMonitor.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             StartupUri="Views/MainView.xaml"/>
+             StartupUri="Views/MainView.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary
+                  Source="pack://application:,,,/WPFUI;component/Styles/Theme/Dark.xaml" />
+                <ResourceDictionary
+                  Source="pack://application:,,,/WPFUI;component/Styles/WPFUI.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
