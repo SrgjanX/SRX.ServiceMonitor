@@ -16,11 +16,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="avatar.jpg" />
     <None Remove="icon.ico" />
     <None Remove="ProcessNames.txt" />
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="avatar.jpg" />
     <Resource Include="icon.ico" />
     <Content Include="ProcessNames.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

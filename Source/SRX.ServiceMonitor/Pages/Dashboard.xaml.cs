@@ -101,8 +101,9 @@ namespace SRX.ServiceMonitor.Pages
                     panelProcesses.Children.Clear();
                     if (processes != null)
                     {
-                        lblRunning.Content = processes?.Where(x => x.Status == ProcessStatus.Running)?.Count() ?? 0;
-                        lblStopped.Content = processes?.Where(x => x.Status == ProcessStatus.Stopped)?.Count() ?? 0;
+                        int running = processes?.Where(x => x.Status == ProcessStatus.Running)?.Count() ?? 0;
+                        //int stopped = processes?.Where(x => x.Status == ProcessStatus.Stopped)?.Count() ?? 0;
+                        lblRunning.Content = $"Running :: [{running}/{processes.Count}]";
                         foreach (ProcessInfo processInfo in processes)
                         {
                             panelProcesses.Children.Add(InitializeProcessItem(processInfo));
