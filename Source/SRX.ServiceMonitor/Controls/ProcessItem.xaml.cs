@@ -49,12 +49,12 @@ namespace SRX.ServiceMonitor.Controls
             switch (status)
             {
                 case ProcessStatus.Running:
-                    btnProcess.BorderBrush = Brushes.Green;
-                    btnProcess.Background = Brushes.LightGreen;//Brushes.LightGreen;
+                    btnProcess.BorderBrush = Brushes.LightGreen;
+                    btnProcess.Background = Brushes.Green;
                     break;
                 case ProcessStatus.Stopped:
-                    btnProcess.BorderBrush = Brushes.DarkRed;
-                    btnProcess.Background = Brushes.LightCoral;
+                    btnProcess.BorderBrush = Brushes.LightCoral;
+                    btnProcess.Background = Brushes.DarkRed;
                     break;
             }
         }

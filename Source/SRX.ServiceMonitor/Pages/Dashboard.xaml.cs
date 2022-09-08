@@ -103,10 +103,10 @@ namespace SRX.ServiceMonitor.Pages
                     {
                         int running = processes?.Where(x => x.Status == ProcessStatus.Running)?.Count() ?? 0;
                         //int stopped = processes?.Where(x => x.Status == ProcessStatus.Stopped)?.Count() ?? 0;
-                        lblRunning.Content = $"Running :: [{running}/{processes.Count}]";
-                        foreach (ProcessInfo processInfo in processes)
+                        lblRunning.Content = $"Running :: [{running}/{processes?.Count ?? 0}]";
+                        for (int i = 0; i < processes?.Count; i++)
                         {
-                            panelProcesses.Children.Add(InitializeProcessItem(processInfo));
+                            panelProcesses.Children.Add(InitializeProcessItem(processes[i]));
                         }
                     }
                 });

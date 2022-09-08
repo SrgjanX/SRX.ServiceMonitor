@@ -5,5 +5,5 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignHeight="75" d:DesignWidth="250">
-    <Button Click="btnProcessName_Click" BorderBrush="DarkRed" BorderThickness="3" Name="btnProcess" Content="processName" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontWeight="Bold" FontFamily="Consolas" Cursor="Hand" VerticalAlignment="Stretch" />
+    <Button Click="btnProcessName_Click" BorderThickness="3" Name="btnProcess" Content="processName" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontWeight="Bold" FontFamily="Consolas" Cursor="Hand" VerticalAlignment="Stretch" />
 </UserControl>
