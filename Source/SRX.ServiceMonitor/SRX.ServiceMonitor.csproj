@@ -6,23 +6,31 @@
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
     <AssemblyName>Service Monitor</AssemblyName>
-    <ApplicationIcon>icon.ico</ApplicationIcon>
     <Authors>SRX.ServiceMonitor Contributors</Authors>
     <Company>SRX.ServiceMonitor Contributors</Company>
     <Description>Simple tool for monitoring windows services/processes.</Description>
     <Copyright>Copyright (C) 2022 SRX.ServiceMonitor contributors</Copyright>
     <PackageProjectUrl>www.srgjanx.net</PackageProjectUrl>
     <RepositoryUrl>https://github.com/SrgjanX/SRX.ServiceMonitor</RepositoryUrl>
+    <ApplicationIcon>Resources\icon.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
     <None Remove="icon.ico" />
     <None Remove="ProcessNames.txt" />
+    <None Remove="Resources\Sounds\ServiceStarted.wav" />
+    <None Remove="Resources\Sounds\ServiceStopped.wav" />
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="icon.ico" />
     <Content Include="ProcessNames.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\icon.ico" />
+    <Content Include="Resources\Sounds\ServiceStopped.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sounds\ServiceStarted.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
